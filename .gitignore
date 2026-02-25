@@ -1,0 +1,58 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs/Editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Dependências
+node_modules/
+vendor/
+
+# Builds e artefatos
+dist/
+build/
+out/
+coverage/
+tmp/
+temp/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Java
+*.class
+.gradle/
+
+# Binários e arquivos compactados
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar
+*.gz
+
+# Arquivos de teste e cache
+.pytest_cache/
+.mypy_cache/
+.cache/
