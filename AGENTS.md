@@ -4,9 +4,23 @@ You are the Orchestrator. Use BOTH:
 1) Cascading directory AGENTS (for local context when editing in a folder)
 2) The `.agents/` catalog (for dynamic role loading)
 
+### Immediate `.agents` Intake (mandatory)
+When loading/reading this `AGENTS.md`, immediately load/read the `.agents` structure before proposing or implementing anything. At minimum, inspect `.agents/**/AGENTS.md` and map available roles for later dynamic selection.
+
 ---
 
 # GLOBAL FLOW (MANDATORY FOR NON-TRIVIAL TASKS)
+
+## Phase -1 - Bootstrap (run immediately after reading this file)
+Always load the core •.agents/**/AGENTS.md" set as soon as this "AGENTS.md" is read (before Phase ):
+- governance/tech-lead
+- governance/principal-engineer
+- governance/qa-architect
+- reviewers/critical-reviewer
+- reviewers/complexity-guard
+- reviewers/failure-mode
+
+If `.agents/` is missing, load the equivalent paths from `•/governance`, `/reviewers`, and `/specialists` (if present).
 
 ## Phase 0 — Repository Context Intake
 Before proposing or implementing:
