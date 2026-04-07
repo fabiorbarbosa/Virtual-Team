@@ -1,125 +1,224 @@
-Inspect the application in the current workspace and generate a reusable Markdown knowledge base for an internal MCP used by IDE-assisted development.
+Inspect the application in the current workspace and generate a complete operational Markdown knowledge base for an internal MCP used in daily IDE-assisted development.
 
-Goal:
-Analyze the codebase and produce generic development guides based on the patterns actually used in the application. These guides must be reusable, implementation-oriented, and detached from product-specific business rules. The output should help an IDE or coding agent understand how to implement new code in a way that matches the project’s established architecture, conventions, and engineering style.
+Core mission:
+Analyze the repository and convert the real engineering patterns found in the codebase into a reusable, generic, operational knowledge base in Markdown.
 
-Primary objective:
-Turn the current application into a set of generic Markdown guides that document:
-- how the project is structured
-- how components/modules/features are implemented
-- how architecture decisions are applied
-- how data access, state, validation, styling, testing, and cross-cutting concerns are handled
-- what patterns should be followed
-- what inconsistencies or anti-patterns should be avoided
+This is not simple project documentation.
+This knowledge base must be structured so an IDE or coding agent can use it every day to:
+- understand the project quickly
+- decide where new code belongs
+- choose the correct implementation pattern
+- respect architecture and layer boundaries
+- apply naming, async, OOP, and visibility conventions correctly
+- distinguish hard rules from soft conventions
+- handle legacy and inconsistency safely
+- self-review generated code before completion
 
-Important constraints:
-- Work from the codebase, not assumptions.
-- Infer patterns only from actual evidence in the repository.
-- Keep the generated documentation generic and reusable.
-- Do not expose sensitive, proprietary, or business-specific details.
-- Replace domain-specific names with neutral terms such as `Entity`, `Feature`, `Item`, `Resource`, `Component`, `Service`, `Repository`.
-- When concrete examples are useful, convert them into abstract templates or pseudocode.
-- If the codebase contains multiple competing patterns, document the dominant one and separately note exceptions.
-- If there is not enough evidence for a strong conclusion, explicitly say so.
-- Prefer practical guidance over descriptive prose.
-- The guides must be useful as internal MCP reference material consumed by IDEs or coding agents.
+Primary outcome:
+Generate a deterministic, ordered, indexable set of Markdown files that function as MCP reference material for:
+- implementation
+- refactoring
+- code review
+- architectural alignment
+- conflict resolution
+- long-term maintenance of engineering standards
 
-What to inspect:
-Review the repository and identify patterns across the following areas when they exist:
-- main stack and frameworks
-- project structure and module organization
-- naming conventions
-- architecture layers and dependency direction
-- components, pages, screens, modules, or feature patterns
-- hooks, services, use cases, controllers, stores, providers, or similar constructs
-- OOP usage and abstraction patterns
-- async method conventions and naming
-- API/data access conventions
-- state management and caching strategy
-- form handling and validation patterns
-- error handling strategy
-- auth and authorization patterns
-- styling and design system conventions
-- testing strategy and test organization
-- environment/config patterns
-- observability/logging/telemetry
-- security and performance practices
-- code review expectations implied by the repository
-- inconsistencies, anti-patterns, and architectural drift
-- responsibility and visibility boundaries for each application layer
+High-level principles:
+- Work from actual repository evidence, not assumptions.
+- Extract dominant patterns from real code.
+- Keep the output generic and reusable.
+- Do not expose business-sensitive or domain-specific details.
+- Replace domain-specific names with neutral placeholders such as `Entity`, `Feature`, `Item`, `Resource`, `Component`, `Service`, `Repository`, `Handler`, `Controller`.
+- Convert concrete implementations into abstract templates, pseudocode, signatures, folder skeletons, and structural examples.
+- Distinguish clearly between observed current behavior and recommended future standard.
+- Prefer operational rules over descriptive commentary.
+- If evidence is weak or inconsistent, say so explicitly and downgrade confidence.
+- The final result must be usable as a daily MCP knowledge base, not just as static documentation.
 
-Mandatory additional analysis:
-The generated guides must explicitly document the following engineering rules when they are present in the codebase, and must recommend a default pattern when the codebase is inconsistent:
+Non-negotiable output requirements:
+The knowledge base must explicitly distinguish:
+- mandatory rules
+- recommended conventions
+- allowed exceptions
+- observed legacy patterns
+- unresolved decisions
+- areas requiring human validation
 
-- OOP conventions
-- async method conventions
-- layer responsibilities and visibility boundaries
-
-The inspection must determine:
-
-1. OOP conventions
-- Whether the project follows object-oriented design in services, use cases, controllers, domain objects, view models, or other abstractions
-- When classes should be used instead of plain functions
-- Expected class responsibilities
-- Constructor dependency patterns
-- Rules for inheritance vs composition
-- Encapsulation expectations
-- How interfaces, abstract classes, base classes, factories, and adapters are used
-- Which patterns should be avoided, such as god classes, stateful utility classes, anemic abstractions, or inappropriate inheritance
-
-2. Async method conventions
-- Whether methods that perform I/O, network, persistence, background work, or deferred processing are always asynchronous
-- Naming rules for async methods
-- Whether async suffixes are required or discouraged
-- How async methods should return values
-- How cancellation, timeout, retries, and error propagation are handled
-- How to avoid blocking patterns or sync-over-async anti-patterns
-- How async behavior should be exposed across layers
-- What naming conventions exist for commands, queries, loaders, fetchers, handlers, creators, updaters, and removers
-
-3. Layer responsibility and visibility
-- The purpose of each layer in the application
-- What each layer is allowed to know about
-- Which dependencies are allowed and forbidden between layers
-- Which symbols should be public, internal, private, protected, exported, or hidden depending on the language/framework
-- Which files/modules should be consumed only inside a feature and which may be shared
-- How boundaries are enforced in practice
-- Which layer owns orchestration, validation, transformation, persistence, UI logic, domain rules, and external integration
-- Common boundary violations and how to avoid them
-
-Non-negotiable documentation rule:
-The output must clearly distinguish:
-- what a layer is responsible for
-- what it must not do
-- what it can access
-- what it must not access
+The knowledge base must also explicitly distinguish:
+- what each layer is responsible for
+- what each layer must not do
+- what each layer can access
+- what each layer must not access
 - what should be publicly exposed
 - what should remain internal
 
-If the codebase does not define these rules clearly, document:
-- the current observed behavior
-- the dominant pattern
-- the recommended standard to adopt going forward
-- the confidence level of that recommendation
+Normative language requirement:
+Use normative language when appropriate:
+- MUST
+- SHOULD
+- MAY
+- MUST NOT
 
-Execution steps:
-1. Inspect the repository structure and detect the application stack.
-2. Identify the most representative source files, directories, and implementation flows.
-3. Read enough real code to distinguish recurring conventions from isolated cases.
-4. Extract stable patterns and convert them into generic implementation guides.
-5. Create a documentation folder for the generated knowledge base.
-6. Write one Markdown file per guide topic.
-7. Ensure each guide is reusable by an IDE/agent and not tied to business-specific behavior.
-8. Produce a final summary listing created files, high-confidence patterns, and areas needing human validation.
+This is required so an IDE or coding agent can distinguish hard constraints from soft guidance.
+
+Deterministic indexing requirement:
+Because these files will be indexed by an internal MCP server, the output must be deterministic and ordered for reliable retrieval.
+
+Indexing rules:
+- Preserve the exact filenames defined in this prompt whenever the corresponding topic is relevant.
+- Use zero-padded numeric prefixes to enforce lexicographic ordering.
+- Do not rename required files.
+- Do not reorder numeric prefixes.
+- If evidence is weak, still create the file and mark it as partial or low confidence instead of omitting it.
+- The order of files must reflect intended reading and retrieval order for IDE/agent consumption.
+
+Precedence model requirement:
+The knowledge base must define document precedence so retrieval conflicts are resolvable.
+
+At minimum, the output must make clear that:
+- mandatory engineering rules override illustrative examples
+- source-of-truth and conflict-resolution guidance override local ambiguity
+- layer-boundary rules override convenience-based implementation shortcuts
+- agent usage instructions guide retrieval order but do not override mandatory engineering rules
+- legacy examples must not be treated as preferred standards unless explicitly marked as such
+
+Repository inspection scope:
+Inspect and infer patterns across the following areas when present:
+
+1. Foundation
+- main stack and frameworks
+- language ecosystem
+- runtime and build system
+- project structure and module organization
+- naming conventions
+- environment/config organization
+
+2. Architecture
+- dominant architectural style
+- layering model
+- dependency direction
+- module boundaries
+- shared vs feature-local code
+- orchestration patterns
+- extension points and integration points
+
+3. Engineering design conventions
+- OOP usage and abstraction style
+- class vs function usage
+- interfaces, base classes, factories, adapters
+- composition vs inheritance
+- constructor dependency patterns
+- async method rules and naming
+- cancellation, timeout, retries, and error propagation patterns
+- visibility/export/access rules across the codebase
+
+4. UI and feature implementation
+- components, screens, pages, features, modules
+- separation between presentation, logic, orchestration, and data
+- styling and design system conventions
+- accessibility patterns
+- routing/navigation conventions
+- forms and validation patterns
+
+5. Data and integration
+- API/data access conventions
+- repository/service/client/gateway patterns
+- DTO/contract/mapping conventions
+- persistence patterns
+- serialization/deserialization rules
+- dependency injection/composition root patterns
+- events/messaging/background work if present
+
+6. Reliability and operations
+- error handling patterns
+- logging/observability/telemetry
+- security practices
+- performance practices
+- resilience patterns
+- test strategy and test structure
+
+7. Team-scale development behavior
+- code review expectations implied by the repository
+- consistency rules
+- common anti-patterns
+- areas with architectural drift
+- recurring sources of technical debt
+
+Mandatory additional analysis:
+The generated guides must explicitly analyze and document the following engineering topics:
+
+1. OOP conventions
+Determine:
+- whether the codebase relies on object-oriented design in services, use cases, controllers, domain models, view models, or related abstractions
+- when classes are preferred over plain functions
+- expected class responsibilities
+- constructor injection patterns
+- public API design expectations
+- encapsulation rules
+- composition vs inheritance rules
+- how interfaces, abstract classes, factories, adapters, and base types are used
+- which OOP anti-patterns are present or should be avoided
+
+2. Async method conventions
+Determine:
+- whether all methods involving I/O, persistence, networking, background work, or deferred execution are asynchronous
+- whether async naming suffixes are required, discouraged, or context-dependent
+- return type conventions
+- how async methods should propagate errors
+- how cancellation, timeout, retries, and idempotency are handled if applicable
+- how async behavior should be exposed across architectural layers
+- how to avoid sync-over-async or blocking anti-patterns
+- naming conventions for loaders, fetchers, handlers, commands, queries, creators, updaters, removers, and processors
+
+3. Layer responsibilities and visibility
+Determine:
+- the purpose of each layer
+- what each layer owns
+- what each layer must never do
+- which dependencies are allowed between layers
+- which dependencies are forbidden
+- which modules/symbols should be public, internal, protected, private, exported, or hidden depending on the language/framework
+- which files are feature-local and which are truly shared
+- how boundaries are enforced in practice
+- common boundary violations and how to avoid them
+
+4. Operational daily-development rules
+Determine:
+- what an IDE/agent should read before implementing code
+- how to choose the correct pattern when multiple similar implementations exist
+- when to follow local consistency vs recommended standard
+- when to preserve a legacy pattern
+- when to propose refactoring instead of reproducing an existing anti-pattern
+- what the default implementation workflow should be for daily development
+
+Conflict-resolution requirement:
+If the codebase is inconsistent, do not flatten everything into a fake standard.
+Instead, explicitly document:
+- current observed behavior
+- dominant pattern
+- recommended future standard
+- confidence level
+- whether a human decision is still needed
 
 Output location:
-Create the guides in one of these locations:
+Create the knowledge base in one of these locations:
 - `docs/mcp-guides/`
 or
 - `.mcp/guides/`
 
-Preferred file set:
-Create at least the following files, adapted to the project’s actual stack.
+Required manifest and retrieval files:
+Create these files first and use them to anchor the rest of the knowledge base:
+
+`00-index.md`
+Include:
+- the full ordered list of generated guides
+- the purpose of each guide
+- the recommended reading order
+- which guides are mandatory before code generation
+- which guides are mandatory before modifying existing code
+- which guides are mandatory before refactoring
+- which guides are reference-only
+- which guides have normative precedence when guidance conflicts
 
 `00-overview.md`
 Include:
@@ -128,6 +227,62 @@ Include:
 - key engineering principles inferred from the repo
 - how to navigate the codebase
 - major structural decisions
+- overall confidence level
+
+`00a-how-to-use-this-knowledge-base.md`
+Include:
+- how an IDE/agent should use the knowledge base during daily development
+- reading order
+- how to choose which guide to consult
+- what to do before generating code
+- what to do before editing existing code
+- what to do before refactoring
+- what to do before finalizing code
+- how to self-check alignment with project standards
+
+`00b-engineering-rules.md`
+Include:
+- mandatory rules
+- recommended conventions
+- prohibited patterns
+- naming rules
+- async rules
+- OOP rules
+- layering rules
+- visibility rules
+- rules that must never be violated
+
+`00c-source-of-truth-and-conflict-resolution.md`
+Include:
+- what is the source of truth when guides and existing code differ
+- how to handle legacy code
+- when to preserve local consistency
+- when to align with the recommended standard
+- when to recommend refactoring
+- when to escalate to human review
+- conflict resolution examples
+
+`00d-retrieval-and-precedence.md`
+Include:
+- document precedence model
+- retrieval priority model
+- which documents are normative
+- which documents are operational
+- which documents are reference-only
+- which documents are advisory
+- how an IDE/agent should resolve conflicting guidance
+
+`00e-coverage-matrix.md`
+Include:
+- covered areas
+- partially covered areas
+- low-confidence areas
+- unclear areas
+- areas requiring human validation
+- suggested future documentation gaps to fill
+
+Core guide set:
+Create at least the following files, adapted to actual stack and repository evidence.
 
 `01-project-structure.md`
 Include:
@@ -135,6 +290,7 @@ Include:
 - responsibility of each major folder/layer
 - where new files should go
 - naming conventions for files, modules, components, types, classes, hooks, services, methods, and symbols
+- feature-local vs shared structure rules
 
 `02-architecture-patterns.md`
 Include:
@@ -143,13 +299,14 @@ Include:
 - dependency flow rules
 - allowed vs discouraged patterns
 - architecture checklist for new work
+- known architectural exceptions
 
 `03-component-implementation-guide.md`
 Include:
 - how to implement a new component in this ecosystem
 - expected structure
-- separation of presentation, logic, and data concerns
-- inputs/outputs/props/events conventions
+- separation of presentation, behavior, orchestration, and data concerns
+- props/inputs/outputs/events conventions
 - accessibility expectations
 - styling expectations
 - testing expectations
@@ -159,7 +316,7 @@ Include:
 Include:
 - how to add a new feature or module
 - expected internal structure
-- how it should connect to routes, services, state, and UI
+- how it connects to routes, services, state, and UI
 - modularity and scalability guidance
 - generic feature/module template
 
@@ -167,9 +324,9 @@ Include:
 Include:
 - how data fetching and persistence are organized
 - patterns for client/service/repository/gateway layers
+- DTO/contract/mapping rules
 - error mapping
-- serialization/deserialization or mapping patterns
-- contract and typing expectations
+- serialization/deserialization or transformation rules
 - generic API integration template
 
 `06-state-management-guide.md`
@@ -187,6 +344,7 @@ Include:
 - fallback behavior
 - logging expectations
 - robustness checklist
+- anti-patterns to avoid
 
 `08-styling-and-design-system.md`
 Include:
@@ -202,6 +360,7 @@ Include:
 - test file organization
 - mocks/fixtures/setup patterns
 - generic test templates
+- test expectations by layer if inferable
 
 `10-security-and-performance.md`
 Include:
@@ -219,6 +378,8 @@ Include:
 - security
 - performance
 - consistency with conventions
+- boundary compliance
+- async/OOP/naming compliance
 
 `12-agent-instructions.md`
 Include:
@@ -227,7 +388,8 @@ Include:
 - how to decide where code belongs
 - which patterns to prioritize
 - what to avoid
-- how to self-check alignment before finalizing generated code
+- how to self-check before finalizing generated code
+- how to handle uncertainty or conflicting evidence
 
 `13-oop-and-abstractions.md`
 Include:
@@ -236,6 +398,7 @@ Include:
 - composition vs inheritance
 - constructor injection patterns
 - public API vs internal implementation
+- encapsulation expectations
 - generic class template
 - anti-patterns to avoid
 
@@ -246,6 +409,7 @@ Include:
 - return type conventions
 - error handling in async flows
 - cancellation and timeout guidance if applicable
+- retries and resilience guidance if applicable
 - generic async service/repository template
 - anti-patterns to avoid
 
@@ -259,30 +423,144 @@ Include:
 - feature-local vs shared code rules
 - boundary checklist for new implementations
 
+`16-implementation-workflow.md`
+Include:
+- default workflow for daily development
+- how to implement a small bug fix
+- how to implement a new component
+- how to implement a new feature/module
+- how to change an existing integration
+- how to approach refactors
+- pre-delivery checklist
+
+`17-task-playbooks.md`
+Include:
+- operational playbooks for common daily tasks
+- bug fix playbook
+- new component playbook
+- new feature playbook
+- integration change playbook
+- refactor playbook
+- code review playbook
+- decision checkpoints for each playbook
+
+`18-dependency-injection-and-composition.md`
+Include:
+- dependency registration patterns
+- composition root conventions
+- service lifetime/scope rules if applicable
+- construction boundaries
+- where object graphs should be assembled
+- anti-patterns to avoid
+
+`19-contracts-mapping-and-dto-guide.md`
+Include:
+- DTO and contract conventions
+- request/response or command/query shapes
+- mapping/transformation rules
+- where mapping belongs
+- anti-patterns to avoid
+- generic templates
+
+`20-legacy-and-migration-rules.md`
+Include:
+- how to work safely in legacy areas
+- when to preserve legacy patterns
+- when to migrate incrementally
+- when to isolate new code from old patterns
+- migration heuristics
+- what requires human approval
+
+`21-agent-self-review-checklist.md`
+Include:
+- final self-review checklist for an IDE/agent before considering a task complete
+- structure
+- naming
+- async usage
+- boundary compliance
+- tests
+- error handling
+- logging
+- security
+- performance
+- consistency with local code and documented standards
+
+`98-decision-records.md`
+Include:
+- important inferred decisions
+- recommended standards not yet fully enforced
+- tradeoffs
+- areas where a human architecture decision is still needed
+- short ADR-style entries where useful
+
 `99-open-questions-and-inconsistencies.md`
 Include:
 - unclear patterns
 - competing implementations
 - areas that require human confirmation
 - technical debt or inconsistent structure worth flagging
+- low-confidence conclusions
+- unresolved architecture decisions
 
-Additional optional guides:
-If the stack justifies them, also create:
-- `16-routing-guide.md`
-- `17-forms-guide.md`
-- `18-authentication-guide.md`
-- `19-domain-layer-guide.md`
-- `20-background-jobs-guide.md`
-- `21-events-and-messaging-guide.md`
-- `22-mobile-patterns-guide.md`
-- `23-accessibility-guide.md`
-- `24-observability-guide.md`
+Optional guides:
+If justified by the stack, also create:
+- `22-routing-guide.md`
+- `23-forms-guide.md`
+- `24-authentication-guide.md`
+- `25-domain-layer-guide.md`
+- `26-background-jobs-guide.md`
+- `27-events-and-messaging-guide.md`
+- `28-mobile-patterns-guide.md`
+- `29-accessibility-guide.md`
+- `30-observability-guide.md`
+- `31-configuration-and-environment-guide.md`
+- `32-persistence-and-migrations-guide.md`
 
-Structure required inside each Markdown file:
-When applicable, organize each guide with the following sections:
+Required metadata at the top of every Markdown file:
+Each file must begin with a compact metadata section containing:
+- `title`
+- `purpose`
+- `scope`
+- `applies_to`
+- `doc_type`
+- `audience`
+- `task_types`
+- `layer_scope`
+- `language_scope`
+- `framework_scope`
+- `keywords`
+- `priority`
+- `retrieval_priority`
+- `status`
+- `confidence`
+- `evidence_type`
+- `source_of_truth`
+- `order`
+- `canonical_id`
+- `depends_on`
+- `must_read_before`
+- `last_review_basis`
+
+Recommended metadata value conventions:
+- `doc_type`: `normative` | `operational` | `reference` | `advisory`
+- `audience`: `agent` | `human` | `both`
+- `priority`: `critical` | `high` | `medium` | `low`
+- `retrieval_priority`: `critical` | `high` | `medium` | `low`
+- `status`: `draft` | `proposed` | `approved` | `legacy`
+- `confidence`: `high` | `medium` | `low`
+- `evidence_type`: `observed` | `inferred` | `recommended`
+- `source_of_truth`: `repository evidence` | `recommended standard` | `mixed`
+
+Required internal structure for each Markdown file:
+When applicable, each guide should include:
 - Title
 - Objective
+- Why this matters for daily development
 - When to use
+- Mandatory rules
+- Recommended conventions
+- Allowed exceptions
+- Legacy considerations
 - Recommended pattern
 - Step-by-step
 - Suggested structure
@@ -290,44 +568,71 @@ When applicable, organize each guide with the following sections:
 - Common mistakes
 - Checklist
 - Internal project references
-- Confidence level
+- Confidence notes
+- Open questions, if any
 
-Writing rules:
-- Write in a direct technical style.
-- Keep guidance actionable.
-- Do not write high-level fluff.
-- Do not copy large sections of application code.
-- Use actual project files as references only to justify the inferred pattern.
-- Make the documentation generic enough for reuse in similar codebases.
-- If the project lacks a mature pattern in some area, state that clearly instead of inventing one.
-- Be explicit about naming conventions for classes, methods, interfaces, async operations, services, repositories, handlers, and feature modules whenever the repository provides enough evidence.
-- Be explicit about layer visibility and consumption rules whenever the repository provides enough evidence.
+Task usability requirement:
+For high-frequency development tasks, provide:
+- short actionable templates
+- naming examples
+- folder/file skeletons
+- signature examples
+- implementation heuristics
+- validation checklists
 
-Example rules:
-- Use short generic pseudocode where useful.
-- Avoid business-specific entity names.
-- Prefer concise templates and implementation heuristics over long explanations.
-- Replace real domain names with neutral terms.
-- If needed, convert concrete code examples into minimal generic templates.
+Evidence model requirement:
+Each guide must identify whether its guidance is:
+- observed in code
+- inferred from dominant patterns
+- recommended as future standard
 
-Confidence rules:
-For each guide, indicate whether the conclusions are:
-- high confidence
-- medium confidence
-- low confidence
+Each guide must briefly list the repository evidence used to support the guidance.
 
-Use confidence based on the amount and consistency of evidence found in the repository.
+Coverage model requirement:
+The knowledge base must explicitly identify:
+- fully covered areas
+- partially covered areas
+- weak-evidence areas
+- no-evidence areas
+- areas requiring human validation
+
+Maintenance model requirement:
+Document how the knowledge base should evolve when:
+- the codebase changes
+- a new dominant pattern emerges
+- a legacy pattern is deprecated
+- a guide becomes outdated
+- a previously recommended standard becomes enforced
+
+Do not treat recommendations as already enforced unless repository evidence supports that claim.
+
+Execution procedure:
+1. Inspect the repository structure and detect the stack.
+2. Identify the most representative files, modules, and implementation flows.
+3. Read enough code to distinguish dominant patterns from exceptions.
+4. Infer rules only where there is evidence.
+5. Separate observed reality from recommended standard where needed.
+6. Create the retrieval and manifest files first.
+7. Generate the rest of the Markdown knowledge base in the selected output folder.
+8. Ensure the guides are operational for daily MCP usage.
+9. Ensure deterministic naming and ordering.
+10. Summarize the result at the end.
 
 Final deliverable:
 After generating the files, provide a concise summary containing:
-1. the list of created Markdown files
+1. the list of created Markdown files in retrieval order
 2. the main patterns inferred from the codebase
-3. the most important inconsistencies or gaps
-4. which guides have lower confidence and why
-5. the suggested reading order for an IDE/agent starting work in this repository
+3. the mandatory rules extracted
+4. the precedence model
+5. the most important inconsistencies or gaps
+6. which guides have lower confidence and why
+7. the suggested reading order for an IDE/agent starting work in this repository
+8. any areas that should be validated by a human before the MCP is treated as authoritative
 
 Behavior requirements:
 - Do not ask for confirmation unless blocked by missing repository access.
 - Be thorough in inspection before writing.
-- Prefer evidence-backed guidance over generic best-practice advice.
-- The final guides must function as internal MCP reference material for IDE-assisted development.
+- Prefer repository-backed guidance over generic best-practice advice.
+- Do not fabricate certainty.
+- Do not omit required files just because evidence is weak; create them and mark them appropriately.
+- The final guides must function as internal MCP reference material for daily development.
